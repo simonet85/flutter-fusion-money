@@ -1,0 +1,16 @@
+# money_fusion
+
+Package Flutter interne pour encaisser des paiements MoneyFusion (PAYIN) depuis nos applications mobiles.
+
+## Contexte (entrées)
+
+- Documentation MoneyFusion : https://docs.moneyfusion.net/fr (pages lues : aperçu, `/webapi`, `/payout`, `/php`, `/python`, `/dotnet`).
+- MoneyFusion n'expose que du HTTP et une page de paiement web : aucun SDK natif à encapsuler.
+- Le « lien API » du tableau de bord est le seul secret du PAYIN, et l'IP de l'appelant doit être enregistrée dans le tableau de bord. La création de paiement passe donc obligatoirement par **notre backend** ; l'app ne détient jamais le lien API.
+- Décisions prises : package **interne** (pas de publication pub.dev), page de paiement en **WebView intégrée**, client **`package:http`**, périmètre **PAYIN côté app uniquement**.
+
+## Constitution
+
+- [specs/mission.md](specs/mission.md)
+- [specs/tech-stack.md](specs/tech-stack.md)
+- [specs/roadmap.md](specs/roadmap.md)
