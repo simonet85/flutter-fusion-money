@@ -54,7 +54,7 @@ Aucune occurrence de `Calculator` dans `lib/` ni `test/`.
 
 ## Not Required
 
-- `flutter doctor` entièrement vert : seules les sections Android/iOS peuvent être en erreur
+- `flutter doctor` entièrement vert : seule la section Flutter doit être verte ; les autres (Android, iOS, Visual Studio…) peuvent être en erreur
 - Aucun émulateur ni appareil
 - Aucune CI
 

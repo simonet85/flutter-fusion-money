@@ -4,7 +4,7 @@ Les phases sont volontairement petites : chacune est une tranche livrable, relis
 
 ---
 
-## Phase 1 — Hello package
+## Phase 1 — Hello package — terminée (2026-11-23)
 - Installer le SDK Flutter sur le poste
 - `flutter create --template=package money_fusion` dans ce dossier
 - `flutter analyze` et `flutter test` passent sur le squelette
