@@ -27,8 +27,8 @@
 
 ## Group 5 — Code minimal
 
-14. Remplacer le contenu de `lib/money_fusion.dart` (classe `Calculator`) par une doc de bibliothèque `/// Paiements MoneyFusion (PAYIN) pour nos apps Flutter.` et une directive `library;`
-15. Remplacer `test/money_fusion_test.dart` par un test de fumée qui importe `package:money_fusion/money_fusion.dart` et passe
+14. Remplacer le contenu de `lib/money_fusion.dart` (classe `Calculator`) par une doc de bibliothèque `/// Paiements MoneyFusion (PAYIN) pour nos apps Flutter.`, une directive `library;` et une constante `moneyFusionVersion`
+15. Remplacer `test/money_fusion_test.dart` par un test de fumée qui importe `package:money_fusion/money_fusion.dart` et vérifie que `moneyFusionVersion` égale la `version` du `pubspec.yaml`
 
 ## Group 6 — Documentation
 

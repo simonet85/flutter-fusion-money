@@ -42,6 +42,8 @@ Non négociable dès le premier commit : le package parsera du JSON (`dynamic`) 
 ### Code d'exemple du template supprimé
 La classe `Calculator` générée est remplacée par une bibliothèque minimale `lib/money_fusion.dart` (doc de bibliothèque) et un unique test de fumée, juste assez pour que `flutter test` ait quelque chose à exécuter.
 
+Ajusté pendant l'implémentation : une bibliothèque vide rend l'import du test inutilisé (`unused_import`), ce qui casse `flutter analyze`. La bibliothèque expose donc une seule constante `moneyFusionVersion`, et le test de fumée vérifie qu'elle est égale au champ `version` de `pubspec.yaml`.
+
 ## Context
 
 Cette phase sert uniquement à prouver la base : le SDK est là, le package se génère, l'analyse stricte est en place et les tests tournent. Rien de MoneyFusion n'est encore codé.
