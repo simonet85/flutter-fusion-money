@@ -57,3 +57,19 @@ Aucune occurrence de `Calculator` dans `lib/` ni `test/`.
 - `flutter doctor` entièrement vert : seules les sections Android/iOS peuvent être en erreur
 - Aucun émulateur ni appareil
 - Aucune CI
+
+## Résultat de validation — 2026-11-23
+
+Exécuté sur Flutter 3.50.1 (canal stable) / Dart 3.14.0, installé dans `C:\dev\flutter` (présent dans le PATH utilisateur).
+
+| Vérification | Résultat |
+|---|---|
+| `flutter analyze` | `No issues found!`, code 0 |
+| `flutter test` | 1 test, `All tests passed!`, code 0 |
+| `dart format --output=none --set-exit-if-changed .` | 0 fichier modifié, code 0 |
+| Occurrences de `Calculator` dans `lib/` et `test/` | aucune |
+| `analysis_options.yaml` | lints inclus, `strict-casts`/`strict-inference`/`strict-raw-types` à `true` |
+| `pubspec.yaml` | `name: money_fusion`, `publish_to: none`, seule dépendance `flutter` |
+| Constitution vs `main` | `mission.md`, `tech-stack.md`, `roadmap.md` inchangés ; README complété (+15 lignes, 0 suppression) |
+
+Les 8 points du Definition of Done sont satisfaits.
