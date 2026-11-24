@@ -23,7 +23,7 @@
 
 11. `MoneyFusionClient` : `backendUrl` requis, `http.Client` injectable, timeout 30 s, `close()` si le client est possédé
 12. `createPayment(PaymentRequest)` : `POST backendUrl`, corps `toJson()`, `Content-Type: application/json` ; `statut: false` → `PaymentCreationException` ; validations de réponse
-13. `checkStatus(String token)` : `GET https://pay.moneyfusion.net/paiementNotif/{token}` ; `statut` de tête, `data.statut` → `PaymentStatus`, `data` → `PaymentDetails`
+13. `checkStatus(String token)` : `GET https://pay.moneyfusion.net/paiementNotif/{token}` ; `statut` de tête, `data.statut` → `PaymentStatus`, `data` → `PaymentDetails`, renvoyés dans un `PaymentStatusReport`
 14. Tests avec `MockClient` : succès création/statut, 500, erreur réseau, timeout, JSON invalide, `statut: false`, `token`/`url` manquants
 
 ## Group 5 — Checkout

@@ -61,6 +61,7 @@ Tous les appels HTTP passent par `MockClient` ; le widget n'est pas instancié a
 ## Not Required
 
 - Vérification sur émulateur/simulateur : phase 4 (app d'exemple), avec la toolchain Android/iOS
+- Comportements WebView dépendants de la plateforme, à vérifier en phase 4 : retour par redirection serveur (détecté via `onNavigationRequest`) et erreurs de sous-ressource quand `isForMainFrame` est `null`
 - Appels réels à MoneyFusion ou à un backend : hors périmètre des tests
 - Polling du statut, webhooks, PAYOUT, API de haut niveau : phases ou backend ultérieurs
 - CI

@@ -9,7 +9,7 @@ Les phases sont volontairement ciblées : chacune est une tranche livrable, reli
 - `flutter create --template=package money_fusion` dans ce dossier
 - `flutter analyze` et `flutter test` passent sur le squelette
 
-## Phase 2 — Paiement de bout en bout
+## Phase 2 — Paiement de bout en bout — terminée (2026-11-24)
 - `PaymentRequest` (montant, articles, téléphone, nom client, infos personnelles, `return_url`, `webhook_url`) avec `toJson()` aux noms exacts MoneyFusion
 - `PaymentSession` (`token`, `url`, `message`) avec `fromJson()`
 - Tests de sérialisation à partir des exemples JSON de la doc

@@ -4,7 +4,7 @@
 
 Livrer le parcours complet côté app, de la requête typée au résultat affichable :
 
-- Modèles `PaymentRequest`, `PaymentSession`, `PaymentStatus`, `PaymentDetails`, et le résultat `PaymentResult`.
+- Modèles `PaymentRequest`, `PaymentSession`, `PaymentStatus`, `PaymentDetails`, `PaymentStatusReport`, et le résultat `PaymentResult`.
 - Client HTTP `MoneyFusionClient` : création via notre backend, vérification du statut via MoneyFusion.
 - Widget `MoneyFusionCheckout` : page de paiement en WebView, détection du retour, statut renvoyé à l'appelant.
 - Erreurs typées, documentation du contrat backend, tests.
@@ -69,7 +69,7 @@ La doc déclare `article` (exigé) et `personal_Info` (facultatif) comme `Array<
 
 ### Un seul check après le retour
 
-Après l'interception de `return_url`, un unique `GET paiementNotif/{token}`. `pending` est renvoyé tel quel à l'app, qui décide de revérifier. Le webhook reçu par le backend reste la source de vérité.
+Après l'interception de `return_url`, un unique `GET paiementNotif/{token}`. `checkStatus(token)` renvoie un `PaymentStatusReport` (statut et détails) ; `CheckoutFlow` le convertit en `PaymentCompleted`. `pending` est renvoyé tel quel à l'app, qui décide de revérifier. Le webhook reçu par le backend reste la source de vérité.
 
 ### Résultat scellé à trois cas
 
