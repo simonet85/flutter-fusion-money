@@ -15,4 +15,4 @@ export 'src/models/payment_status.dart';
 export 'src/models/payment_status_report.dart';
 
 /// Version du package, à garder alignée sur `version` dans `pubspec.yaml`.
-const String moneyFusionVersion = '0.2.0';
+const String moneyFusionVersion = '0.3.0';

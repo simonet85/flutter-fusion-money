@@ -13,7 +13,7 @@ Package Flutter interne pour encaisser des paiements MoneyFusion (PAYIN) depuis 
 
 - Flutter **3.50.1** (canal stable), Dart **3.14.0**, installé depuis l'archive officielle dans `C:\dev\flutter` (`C:\dev\flutter\bin` dans le PATH utilisateur).
 - Ne pas changer de version de SDK sans le décider dans une spec de phase.
-- Toolchain Android/iOS non requise avant la phase 4 (vérification sur appareil de l'app d'exemple).
+- Toolchain Android requise pour l'app d'exemple (Android Studio, SDK, émulateur). iOS n'est pas vérifié : pas de Mac sur le poste.
 
 ## Commandes
 
@@ -89,6 +89,26 @@ switch (result) {
     // route fermée sans résultat
 }
 ```
+
+## Exemple
+
+`example/` est une app Android minimale branchée sur un faux backend local.
+Deux terminaux :
+
+```sh
+# Terminal 1, depuis la racine du dépôt
+dart run example/fake_backend/server.dart
+
+# Terminal 2
+cd example
+flutter run
+```
+
+L'app cible `http://10.0.2.2:8090`, alias de la machine hôte vu depuis
+l'émulateur Android. Le manifeste de l'exemple autorise le HTTP en clair et
+l'accès Internet pour ce backend local. Le faux backend propose « Payer »
+(statut `paid`) et « Annuler » (statut `failure`) ; la croix de fermeture du
+checkout renvoie `PaymentCancelled`.
 
 ## Contrat backend
 

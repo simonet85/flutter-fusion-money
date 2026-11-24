@@ -47,15 +47,15 @@ Générée avec `flutter create --template=app --project-name money_fusion_examp
 - affichage du résultat : statut et détails pour `PaymentCompleted`, message pour `PaymentError`, texte pour `PaymentCancelled` ;
 - client créé dans `initState` et fermé dans `dispose`.
 
-Configuration locale, centralisée en constantes : `backendUrl` = `http://10.0.2.2:8080/payments`, `statusBaseUrl` = `http://10.0.2.2:8080`, `returnUrl` = `http://10.0.2.2:8080/callback`. `10.0.2.2` est l'alias de la machine hôte vu depuis l'émulateur Android ; le README le précise.
+Configuration locale, centralisée en constantes : `backendUrl` = `http://10.0.2.2:8090/payments`, `statusBaseUrl` = `http://10.0.2.2:8090`, `returnUrl` = `http://10.0.2.2:8090/callback`. `10.0.2.2` est l'alias de la machine hôte vu depuis l'émulateur Android ; le README le précise.
 
 Android : `android.permission.INTERNET` et `android:usesCleartextTraffic="true"` dans le manifeste principal de l'exemple, sans quoi la WebView et le client HTTP refusent le HTTP local.
 
 ### Faux backend autonome
 
-`example/fake_backend/server.dart`, exécuté avec `dart run example/fake_backend/server.dart`, écoute sur `0.0.0.0:8080` :
+`example/fake_backend/server.dart`, exécuté avec `dart run example/fake_backend/server.dart`, écoute sur `0.0.0.0:8090` :
 
-- `POST /payments` : valide la présence de `totalPrice`, `article`, `numeroSend`, `nomclient`, `return_url` ; sinon `{statut: false, message: ...}` avec HTTP 200. Sinon crée un token `demo-<n>`, mémorise montant et `return_url`, renvoie `{statut: true, token, message, url: "http://10.0.2.2:8080/pay/<token>"}`.
+- `POST /payments` : valide la présence de `totalPrice`, `article`, `numeroSend`, `nomclient`, `return_url` ; sinon `{statut: false, message: ...}` avec HTTP 200. Sinon crée un token `demo-<n>`, mémorise montant et `return_url`, renvoie `{statut: true, token, message, url: "http://10.0.2.2:8090/pay/<token>"}`.
 - `GET /pay/<token>` : page HTML avec le montant, « Payer » et « Annuler ».
 - `GET /pay/<token>/finish?result=paid|failure` : met à jour le statut, puis renvoie une page HTML qui navigue vers le `return_url` mémorisé par `location.replace(...)`, avec le token en query.
 - `GET /paiementNotif/<token>` : `{statut: true, data: {Montant, frais, statut, moyen, numeroTransaction}}` avec le statut courant (`pending` par défaut, puis `paid` ou `failure`).

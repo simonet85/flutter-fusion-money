@@ -21,7 +21,7 @@ flutter test
 
 Code 0, suite des phases 2 et 3 toujours verte, plus :
 
-- `statusBaseUrl` local → `GET http://10.0.2.2:8080/paiementNotif/{token}` exact
+- `statusBaseUrl` local → `GET http://10.0.2.2:8090/paiementNotif/{token}` exact
 - sans `statusBaseUrl` → `GET https://pay.moneyfusion.net/paiementNotif/{token}` (test existant)
 
 Le code de l'exemple n'a pas de tests automatisés (cf. Not Required).
@@ -47,7 +47,7 @@ Vérifié à la main :
 - `POST /payments` sans `return_url` → `statut: false` ; avec le corps complet → `statut: true`, `token`, `url`
 - `GET /paiementNotif/<token>` → `data.statut` `pending` puis `paid` ou `failure` après `finish`
 - `Montant`, `frais`, `moyen`, `numeroTransaction` présents et cohérents avec la requête
-- écoute sur `0.0.0.0:8080`, joignable en `10.0.2.2` depuis l'émulateur
+- écoute sur `0.0.0.0:8090`, joignable en `10.0.2.2` depuis l'émulateur
 
 ### 6. La démo fonctionne sur émulateur Android
 
@@ -76,4 +76,23 @@ Aucun secret, aucun paiement réel ; l'app ne parle qu'au backend local. Les tes
 - Webhooks, PAYOUT, polling du statut
 - CI
 
-## Résultat de validation — À COMPLÉTER
+## Résultat de validation — partiel au 2026-11-24
+
+Exécuté sur Flutter 3.50.1 (canal stable) / Dart 3.14.0.
+
+| Vérification | Résultat |
+|---|---|
+| `flutter analyze` (racine et `example/`) | `No issues found!`, code 0 dans les deux cas |
+| `flutter test` | 35 tests, `All tests passed!`, code 0 (34 + `statusBaseUrl`) |
+| `dart format --output=none --set-exit-if-changed .` | 0 fichier modifié, code 0 |
+| Extension d'API | `statusBaseUrl` testé ; URL par défaut inchangée ; version `0.3.0` alignée |
+| Faux backend (`curl`) | création refusée → `statut: false` ; acceptée → token et `url` ; statut `pending` → `paid` et `failure` ; champs de `data` conformes |
+| Android Studio, SDK, émulateur | à installer |
+| Scénarios Android (paid, failure, annulation, backend arrêté) | en attente |
+
+Le port de la démo est `8090` : `8080` était déjà utilisé par un autre service
+local sur le poste. Le faux backend écoute sur `0.0.0.0:8090` et l'app cible
+`10.0.2.2:8090`.
+
+La phase n'est pas validée tant que les scénarios Android du point 6 n'ont pas
+été exécutés sur l'émulateur.

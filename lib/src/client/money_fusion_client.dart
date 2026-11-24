@@ -17,10 +17,23 @@ import '../models/payment_details.dart';
 class MoneyFusionClient {
   MoneyFusionClient({
     required this.backendUrl,
+    Uri? statusBaseUrl,
     http.Client? httpClient,
     this.timeout = const Duration(seconds: 30),
-  }) : _httpClient = httpClient ?? http.Client(),
+  }) : statusBaseUrl = statusBaseUrl ?? defaultStatusBaseUrl,
+       _httpClient = httpClient ?? http.Client(),
        _ownsClient = httpClient == null;
+
+  /// Base de la vérification de statut (`paiementNotif`).
+  ///
+  /// Par défaut le service MoneyFusion. Terminez par `/` si la base contient
+  /// un chemin.
+  final Uri statusBaseUrl;
+
+  /// Base par défaut de la vérification de statut.
+  static final Uri defaultStatusBaseUrl = Uri.parse(
+    'https://pay.moneyfusion.net',
+  );
 
   /// Endpoint backend qui relaie la création vers MoneyFusion.
   final Uri backendUrl;
@@ -62,8 +75,8 @@ class MoneyFusionClient {
         'Le token de paiement est vide.',
       );
     }
-    final url = Uri.parse(
-      'https://pay.moneyfusion.net/paiementNotif/${Uri.encodeComponent(token)}',
+    final url = statusBaseUrl.resolve(
+      'paiementNotif/${Uri.encodeComponent(token)}',
     );
     final response = await _send(() => _httpClient.get(url));
     _ensureSuccess(response);

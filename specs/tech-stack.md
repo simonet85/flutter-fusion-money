@@ -16,7 +16,7 @@
 ## Contrat avec MoneyFusion (lu dans la doc)
 
 - Création (appelée **par le backend**, pas par le package) : `POST <lien API>` avec `totalPrice`, `article` (tableau), `numeroSend`, `nomclient`, `personal_Info` (tableau, facultatif), `return_url`, `webhook_url`. Réponse : `statut`, `token`, `message`, `url`.
-- Statut (appelable par le package) : `GET https://pay.moneyfusion.net/paiementNotif/{token}`. Réponse : `statut`, `message`, `data` (dont `data.statut` ∈ `pending` | `paid` | `failure` | `no paid`, `Montant`, `frais`, `moyen`, `numeroTransaction`).
+- Statut (appelable par le package) : `GET <base>/paiementNotif/{token}`, avec `base` configurable via `statusBaseUrl` (défaut `https://pay.moneyfusion.net`). Réponse : `statut`, `message`, `data` (dont `data.statut` ∈ `pending` | `paid` | `failure` | `no paid`, `Montant`, `frais`, `moyen`, `numeroTransaction`).
 
 ## Contrat avec notre backend
 
@@ -33,6 +33,8 @@
 - `flutter_lints` pour l'analyse statique (`flutter analyze` sans avertissement).
 - `dart format`.
 - Une app `example/` pour la vérification manuelle sur appareil.
+- Android Studio + SDK + émulateur pour l'exemple ; iOS non vérifié (pas de Mac).
+- `example/fake_backend/server.dart` : faux backend `dart:io` pour la démo locale.
 - Prérequis poste : SDK Flutter 3.50.1 (Dart 3.14.0) installé dans `C:\dev\flutter`, `C:\dev\flutter\bin` dans le PATH utilisateur ; version exacte notée dans le README.
 
 ## Ce que nous n'utilisons pas

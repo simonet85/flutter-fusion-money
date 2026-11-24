@@ -3,7 +3,7 @@
 ## Group 1 — `statusBaseUrl`
 
 1. Ajouter `statusBaseUrl` facultatif à `MoneyFusionClient` : champ public, défaut `https://pay.moneyfusion.net`, utilisé par `checkStatus` via `statusBaseUrl.resolve('paiementNotif/{token}')`
-2. Test : base locale → `GET http://10.0.2.2:8080/paiementNotif/{token}` exact ; le test de la phase 2 sur l'URL par défaut reste vert
+2. Test : base locale → `GET http://10.0.2.2:8090/paiementNotif/{token}` exact ; le test de la phase 2 sur l'URL par défaut reste vert
 3. Bump `0.3.0` : pubspec, `moneyFusionVersion`, `CHANGELOG.md`
 
 ## Group 2 — App `example/`
@@ -11,7 +11,7 @@
 4. Générer l'app : `flutter create --template=app --project-name money_fusion_example --platforms=android example`
 5. Dépendance `money_fusion: {path: ../}` ; supprimer le code de compteur généré
 6. Écran unique : champs montant/téléphone/nom, bouton « Payer », aperçu du `PaymentResult` ; client créé en `initState`, fermé en `dispose`
-7. Constantes locales : `backendUrl`, `statusBaseUrl`, `returnUrl` sur `http://10.0.2.2:8080` ; manifeste Android : `INTERNET` + `usesCleartextTraffic`
+7. Constantes locales : `backendUrl`, `statusBaseUrl`, `returnUrl` sur `http://10.0.2.2:8090` ; manifeste Android : `INTERNET` + `usesCleartextTraffic`
 8. `flutter analyze` dans `example/` : propre
 
 ## Group 3 — Faux backend

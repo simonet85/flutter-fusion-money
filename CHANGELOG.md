@@ -1,3 +1,8 @@
+## 0.3.0
+
+* `MoneyFusionClient.statusBaseUrl` facultatif pour vérifier le statut contre un
+  backend de test ; app d'exemple Android avec faux backend local.
+
 ## 0.2.0
 
 * API de haut niveau `MoneyFusion.pay` : création, checkout et résultat non nul

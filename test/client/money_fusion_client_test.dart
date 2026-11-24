@@ -195,6 +195,25 @@ void main() {
       expect(report.details?.transactionNumber, '0101010101');
     });
 
+    test('utilise statusBaseUrl quand il est fourni', () async {
+      late http.Request captured;
+      final client = MoneyFusionClient(
+        backendUrl: backendUrl,
+        statusBaseUrl: Uri.parse('http://10.0.2.2:8090'),
+        httpClient: MockClient((request) async {
+          captured = request;
+          return http.Response(statusResponseJson, 200);
+        }),
+      );
+
+      await client.checkStatus('tok en');
+
+      expect(
+        captured.url.toString(),
+        'http://10.0.2.2:8090/paiementNotif/tok%20en',
+      );
+    });
+
     test('refuse un statut de tête à false', () {
       final client = clientReturning(
         '{"statut":false,"message":"Token inconnu"}',
