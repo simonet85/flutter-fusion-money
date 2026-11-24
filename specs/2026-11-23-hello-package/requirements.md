@@ -7,9 +7,9 @@ Installer le SDK Flutter sur le poste, générer le squelette du package `money_
 ## Out of Scope
 
 - Aucun modèle MoneyFusion (`PaymentRequest`, `PaymentSession`) : phase 2
-- Aucune dépendance `http` ni `webview_flutter` : phases 4 et 5
-- Pas de toolchain Android/iOS (Android Studio, SDK Android, émulateur, Xcode) : repoussée à la phase 5 ou 7
-- Pas d'app `example/` : phase 7
+- Aucune dépendance `http` ni `webview_flutter` : phase 2
+- Pas de toolchain Android/iOS (Android Studio, SDK Android, émulateur, Xcode) : repoussée à la phase 4
+- Pas d'app `example/` : phase 4
 - Pas de CI
 
 ## Decisions

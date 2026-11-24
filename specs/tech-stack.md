@@ -32,7 +32,7 @@
 - `flutter_lints` pour l'analyse statique (`flutter analyze` sans avertissement).
 - `dart format`.
 - Une app `example/` pour la vérification manuelle sur appareil.
-- Prérequis poste : le SDK Flutter n'est pas encore installé (`flutter`/`dart` absents du PATH) ; à installer avant la phase 1.
+- Prérequis poste : SDK Flutter 3.50.1 (Dart 3.14.0) installé dans `C:\dev\flutter`, `C:\dev\flutter\bin` dans le PATH utilisateur ; version exacte notée dans le README.
 
 ## Ce que nous n'utilisons pas
 

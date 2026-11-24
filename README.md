@@ -13,7 +13,7 @@ Package Flutter interne pour encaisser des paiements MoneyFusion (PAYIN) depuis 
 
 - Flutter **3.50.1** (canal stable), Dart **3.14.0**, installé depuis l'archive officielle dans `C:\dev\flutter` (`C:\dev\flutter\bin` dans le PATH utilisateur).
 - Ne pas changer de version de SDK sans le décider dans une spec de phase.
-- Toolchain Android/iOS non requise avant la phase 5.
+- Toolchain Android/iOS non requise avant la phase 4 (vérification sur appareil de l'app d'exemple).
 
 ## Commandes
 
