@@ -23,7 +23,7 @@ Les phases sont volontairement ciblées : chacune est une tranche livrable, reli
 - Interception de `return_url`, puis `checkStatus` et retour du `PaymentStatus` à l'appelant
 - Fermeture par l'utilisateur → résultat « annulé » distinct d'un échec
 
-## Phase 3 — API de haut niveau
+## Phase 3 — API de haut niveau — terminée (2026-11-24)
 - Une fonction unique type `MoneyFusion.pay(context, request)` qui enchaîne création, écran et statut
 - Doc du package (README, dartdoc) et contrat de l'endpoint backend pour l'équipe serveur
 

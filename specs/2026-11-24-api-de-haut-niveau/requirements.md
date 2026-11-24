@@ -42,7 +42,7 @@ Le client et son `backendUrl` sont fournis explicitement : aucun état global ni
 
 ### Résultat non nul
 
-`Navigator.push<PaymentResult>` peut renvoyer `null` si la route est fermée sans résultat. `pay` normalise ce cas en `const PaymentCancelled()` : la signature est `Future<PaymentResult>`, et l'app n'a plus de cas `null` à traiter. Une annulation utilisateur produit déjà `PaymentCancelled` via le widget.
+`Navigator.push<PaymentResult>` peut renvoyer `null` si la route est fermée sans résultat. `pay` normalise ce cas en `const PaymentCancelled()` : la signature est `Future<PaymentResult>`, et l'app n'a plus de cas `null` à traiter. Une annulation utilisateur produit déjà `PaymentCancelled` via le widget. Si le contexte n'est plus monté au retour de la création, `pay` renvoie également `PaymentCancelled` sans ouvrir de route (garde `use_build_context_synchronously`).
 
 ### Documentation
 
