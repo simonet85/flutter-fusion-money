@@ -67,4 +67,21 @@ Tous les appels HTTP passent par `MockClient`. Le chemin nominal de `pay` (créa
 - Personnalisation de la route, du thème ou de la localisation : hors périmètre
 - CI
 
-## Résultat de validation — À COMPLÉTER
+## Résultat de validation — 2026-11-24
+
+Exécuté sur Flutter 3.50.1 (canal stable) / Dart 3.14.0.
+
+| Vérification | Résultat |
+|---|---|
+| `flutter analyze` | `No issues found!`, code 0 |
+| `flutter test` | 34 tests, `All tests passed!`, code 0 (30 de la phase 2 + 4 pour `pay`) |
+| `dart format --output=none --set-exit-if-changed .` | 0 fichier modifié, code 0 |
+| Dépendances | inchangées : `flutter`, `http` 1.6.0, `material_ui` 1.11.1, `webview_flutter` 4.14.1 |
+| API | `MoneyFusion.pay` exportée, résultat non nul, erreurs de création dans `PaymentError` |
+| README | parcours principal `pay` + sous-section « API de bas niveau » ; contrat backend inchangé |
+| Version | `0.2.0` dans le pubspec, `moneyFusionVersion` et le CHANGELOG |
+| Réseau et WebView | aucun appel réel ; `MockClient` uniquement, chemin nominal non instancié en test |
+
+Les 8 points du Definition of Done sont satisfaits. La vérification du chemin
+nominal et des comportements WebView sur appareil reste reportée à la phase 4,
+conformément au périmètre.

@@ -1,3 +1,8 @@
+## 0.2.0
+
+* API de haut niveau `MoneyFusion.pay` : création, checkout et résultat non nul
+  en un seul appel ; les erreurs de création sont renvoyées dans `PaymentError`.
+
 ## 0.1.0
 
 * Parcours de paiement de bout en bout : modèles MoneyFusion, client HTTP

@@ -31,16 +31,41 @@ final client = MoneyFusionClient(
   backendUrl: Uri.parse('https://api.notre-backend.example/payments'),
 );
 
-final request = PaymentRequest(
-  totalPrice: 200,
-  articles: [
-    {'sac': 100, 'chaussure': 100},
-  ],
-  numeroSend: '01010101',
-  nomclient: 'John Doe',
-  returnUrl: Uri.parse('https://app.notre-service.example/callback'),
+final result = await MoneyFusion.pay(
+  context,
+  PaymentRequest(
+    totalPrice: 200,
+    articles: [
+      {'sac': 100, 'chaussure': 100},
+    ],
+    numeroSend: '01010101',
+    nomclient: 'John Doe',
+    returnUrl: Uri.parse('https://app.notre-service.example/callback'),
+  ),
+  client: client,
 );
 
+switch (result) {
+  case PaymentCompleted(:final status, :final details):
+    // status : pending, paid, failure ou noPaid
+  case PaymentCancelled():
+    // l'utilisateur a fermé la page de paiement
+  case PaymentError(:final error):
+    // erreur de création, réseau, HTTP ou format de réponse
+}
+```
+
+`MoneyFusion.pay` enchaîne création, checkout et vérification : le résultat est
+toujours non nul et aucune exception n'est levée. Appelez `client.close()` quand
+vous n'utilisez plus le client. Le statut renvoyé sert à l'affichage : la source
+de vérité reste le webhook reçu par le backend.
+
+### API de bas niveau
+
+Pour contrôler la navigation vous-même, utilisez le client et le widget
+directement :
+
+```dart
 final session = await client.createPayment(request);
 
 final result = await Navigator.of(context).push<PaymentResult>(
@@ -55,18 +80,15 @@ final result = await Navigator.of(context).push<PaymentResult>(
 
 switch (result) {
   case PaymentCompleted(:final status, :final details):
-    // status : pending, paid, failure ou noPaid
+    // status et détails de la transaction
   case PaymentCancelled():
-    // l'utilisateur a fermé la page de paiement
+    // fermeture par l'utilisateur
   case PaymentError(:final error):
-    // erreur réseau, HTTP ou format de réponse
+    // erreur vérifiée par le checkout
   case null:
     // route fermée sans résultat
 }
 ```
-
-Appelez `client.close()` quand vous n'utilisez plus le client. Le statut renvoyé
-sert à l'affichage : la source de vérité reste le webhook reçu par le backend.
 
 ## Contrat backend
 

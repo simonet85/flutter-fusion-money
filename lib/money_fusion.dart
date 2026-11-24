@@ -7,6 +7,7 @@ export 'src/checkout/return_url.dart';
 export 'src/client/money_fusion_client.dart';
 export 'src/exceptions.dart';
 export 'src/models/payment_details.dart';
+export 'src/money_fusion.dart';
 export 'src/models/payment_request.dart';
 export 'src/models/payment_result.dart';
 export 'src/models/payment_session.dart';
@@ -14,4 +15,4 @@ export 'src/models/payment_status.dart';
 export 'src/models/payment_status_report.dart';
 
 /// Version du package, à garder alignée sur `version` dans `pubspec.yaml`.
-const String moneyFusionVersion = '0.1.0';
+const String moneyFusionVersion = '0.2.0';
