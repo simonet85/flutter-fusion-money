@@ -24,6 +24,87 @@ flutter test
 dart format --output=none --set-exit-if-changed .
 ```
 
+## Utilisation
+
+```dart
+final client = MoneyFusionClient(
+  backendUrl: Uri.parse('https://api.notre-backend.example/payments'),
+);
+
+final request = PaymentRequest(
+  totalPrice: 200,
+  articles: [
+    {'sac': 100, 'chaussure': 100},
+  ],
+  numeroSend: '01010101',
+  nomclient: 'John Doe',
+  returnUrl: Uri.parse('https://app.notre-service.example/callback'),
+);
+
+final session = await client.createPayment(request);
+
+final result = await Navigator.of(context).push<PaymentResult>(
+  MaterialPageRoute(
+    builder: (_) => MoneyFusionCheckout(
+      client: client,
+      session: session,
+      returnUrl: request.returnUrl,
+    ),
+  ),
+);
+
+switch (result) {
+  case PaymentCompleted(:final status, :final details):
+    // status : pending, paid, failure ou noPaid
+  case PaymentCancelled():
+    // l'utilisateur a fermé la page de paiement
+  case PaymentError(:final error):
+    // erreur réseau, HTTP ou format de réponse
+  case null:
+    // route fermée sans résultat
+}
+```
+
+Appelez `client.close()` quand vous n'utilisez plus le client. Le statut renvoyé
+sert à l'affichage : la source de vérité reste le webhook reçu par le backend.
+
+## Contrat backend
+
+Le package envoie le corps MoneyFusion brut à `backendUrl`, en `POST`, avec
+`Content-Type: application/json` :
+
+```json
+{
+  "totalPrice": 200,
+  "article": [{"sac": 100, "chaussure": 100}],
+  "personal_Info": [{"userId": 1, "orderId": 123}],
+  "numeroSend": "01010101",
+  "nomclient": "John Doe",
+  "return_url": "https://app.notre-service.example/callback",
+  "webhook_url": "https://api.notre-backend.example/hooks/moneyfusion"
+}
+```
+
+`article` et `personal_Info` sont des objets libres (`Array<Object>` dans la
+doc) : le package ne les interprète pas. Le backend ajoute le lien API
+(secret, IP enregistrée) et relaie la réponse MoneyFusion brute :
+
+```json
+{
+  "statut": true,
+  "token": "xxxxxxxx",
+  "message": "paiement en cours",
+  "url": "https://payin.moneyfusion.net/payment/xxxxxxxx/Marchand"
+}
+```
+
+Si `statut` vaut `false`, le package lève `PaymentCreationException`. Le lien
+API et la clé PAYOUT ne doivent jamais quitter le backend.
+
+Statuts de `data.statut` sur `paiementNotif/{token}` : `pending`, `paid`,
+`failure`, `no paid` (exposé en Dart comme `PaymentStatus.noPaid`). Toute
+autre valeur lève `UnknownPaymentStatusException`.
+
 ## Constitution
 
 - [specs/mission.md](specs/mission.md)

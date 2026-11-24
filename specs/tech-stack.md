@@ -10,6 +10,7 @@
 | Type de projet | `flutter create --template=package` | Pas de code natif à écrire, donc pas de template `plugin` |
 | Client HTTP | **`package:http`** | Officiel, léger, `MockClient` intégré pour les tests |
 | Page de paiement | **`webview_flutter`** | Paiement dans l'app ; `NavigationDelegate` intercepte `return_url` |
+| Widgets Material | **`material_ui`** | Depuis Flutter 3.47, `flutter/material` est déprécié au profit de ce paquet officiel |
 | Plateformes | Android, iOS | Seules plateformes supportées par `webview_flutter` |
 
 ## Contrat avec MoneyFusion (lu dans la doc)

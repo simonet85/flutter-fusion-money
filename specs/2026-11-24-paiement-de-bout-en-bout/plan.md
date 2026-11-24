@@ -2,7 +2,7 @@
 
 ## Group 1 — Dépendances et structure
 
-1. Ajouter `http` et `webview_flutter` aux `dependencies` (contraintes `^1.0.0` et `^4.0.0` compatibles Dart 3.14), sans autre dépendance
+1. Ajouter `http`, `material_ui` (Material n'est plus dans le SDK Flutter 3.50) et `webview_flutter` aux `dependencies`, sans autre dépendance
 2. `flutter pub get` ; noter les versions résolues
 3. Créer `lib/src/models/`, `lib/src/client/`, `lib/src/checkout/` ; n'exporter que l'API publique depuis `lib/money_fusion.dart`
 

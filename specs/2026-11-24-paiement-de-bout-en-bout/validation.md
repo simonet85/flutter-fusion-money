@@ -40,7 +40,7 @@ Code 0.
 
 ### 4. Les dépendances restent maîtrisées
 
-`pubspec.yaml` ne contient que `flutter`, `http` et `webview_flutter` en dépendances ; aucun autre paquet ajouté sans décision consignée.
+`pubspec.yaml` ne contient que `flutter`, `http`, `material_ui` et `webview_flutter` en dépendances ; `material_ui` est le paquet officiel qui remplace `flutter/material`, déprécié en 3.50. Aucun autre paquet ajouté sans décision consignée.
 
 ### 5. Le contrat backend est documenté
 
@@ -65,6 +65,19 @@ Tous les appels HTTP passent par `MockClient` ; le widget n'est pas instancié a
 - Polling du statut, webhooks, PAYOUT, API de haut niveau : phases ou backend ultérieurs
 - CI
 
-## Résultat de validation
+## Résultat de validation — 2026-11-24
 
-À compléter à l'implémentation.
+Exécuté sur Flutter 3.50.1 (canal stable) / Dart 3.14.0.
+
+| Vérification | Résultat |
+|---|---|
+| `flutter analyze` | `No issues found!`, code 0 |
+| `flutter test` | 30 tests, `All tests passed!`, code 0 |
+| `dart format --output=none --set-exit-if-changed .` | 0 fichier modifié, code 0 |
+| Dépendances | `flutter`, `http` 1.6.0, `material_ui` 1.11.1, `webview_flutter` 4.14.1 |
+| Contrat backend | README : sections « Utilisation » et « Contrat backend » |
+| Version | `0.1.0` dans le pubspec, `moneyFusionVersion` et le CHANGELOG |
+| Réseau et WebView | aucun appel réel ; tout passe par `MockClient`, aucun test n'instancie la WebView |
+
+Les 8 points du Definition of Done sont satisfaits. La vérification sur
+appareil reste reportée à la phase 4, conformément au périmètre.

@@ -63,6 +63,10 @@ La doc déclare `article` (exigé) et `personal_Info` (facultatif) comme `Array<
 
 `MoneyFusionClient({required Uri backendUrl, http.Client? httpClient, Duration timeout = const Duration(seconds: 30)})`. Le client HTTP est injectable (`MockClient` en test) ; sans injection, le client est créé et fermé par `close()`. Pas de configuration globale ni statique. Le timeout s'applique à chaque appel.
 
+### Dépendances
+
+`http` (1.6.0) et `webview_flutter` (4.14.1) pour le réseau et la page de paiement. `material_ui` (1.11.1) est ajouté car Flutter 3.50 déprécie `package:flutter/material.dart` depuis 3.47 au profit de ce paquet officiel ; sans lui, `flutter analyze` n'est pas propre. La contrainte `environment.flutter` passe donc à `>=3.47.0`, minimum exigé par `material_ui`. Aucune autre dépendance.
+
 ### Un seul check après le retour
 
 Après l'interception de `return_url`, un unique `GET paiementNotif/{token}`. `pending` est renvoyé tel quel à l'app, qui décide de revérifier. Le webhook reçu par le backend reste la source de vérité.
