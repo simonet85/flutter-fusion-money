@@ -27,9 +27,10 @@ Les phases sont volontairement ciblées : chacune est une tranche livrable, reli
 - Une fonction unique type `MoneyFusion.pay(context, request)` qui enchaîne création, écran et statut
 - Doc du package (README, dartdoc) et contrat de l'endpoint backend pour l'équipe serveur
 
-## Phase 4 — App d'exemple
+## Phase 4 — App d'exemple — terminée (2026-11-25)
+- `MoneyFusionClient.statusBaseUrl` facultatif pour vérifier le statut contre un backend de test
 - `example/` avec un faux backend configurable
-- Vérification manuelle sur émulateur Android et simulateur iOS
+- Vérification manuelle sur émulateur Android ; iOS non vérifié (pas de Mac)
 
 ---
 
