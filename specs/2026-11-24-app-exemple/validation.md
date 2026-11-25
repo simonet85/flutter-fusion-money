@@ -76,9 +76,12 @@ Aucun secret, aucun paiement réel ; l'app ne parle qu'au backend local. Les tes
 - Webhooks, PAYOUT, polling du statut
 - CI
 
-## Résultat de validation — partiel au 2026-11-24
+## Résultat de validation — 2026-11-25
 
-Exécuté sur Flutter 3.50.1 (canal stable) / Dart 3.14.0.
+Exécuté sur Flutter 3.50.1 (canal stable) / Dart 3.14.0, avec Android Studio
+2026.2.2.10, SDK Android 36 (build-tools 36.0.0, platform-tools 37.0.3),
+émulateur 37.3.10.0 et AVD `demo36` (`system-images;android-36;google_apis;x86_64`,
+profil Pixel 6), accéléré par WHPX.
 
 | Vérification | Résultat |
 |---|---|
@@ -87,12 +90,22 @@ Exécuté sur Flutter 3.50.1 (canal stable) / Dart 3.14.0.
 | `dart format --output=none --set-exit-if-changed .` | 0 fichier modifié, code 0 |
 | Extension d'API | `statusBaseUrl` testé ; URL par défaut inchangée ; version `0.3.0` alignée |
 | Faux backend (`curl`) | création refusée → `statut: false` ; acceptée → token et `url` ; statut `pending` → `paid` et `failure` ; champs de `data` conformes |
-| Android Studio, SDK, émulateur | à installer |
-| Scénarios Android (paid, failure, annulation, backend arrêté) | en attente |
+| Android Studio, SDK, émulateur | installés et vérifiés (`flutter doctor` : toolchain Android verte, licences acceptées, `-accel-check` : WHPX utilisable) |
+| Scénario « Payer » | `Statut : paid`, `Montant : 200`, `Frais : 0`, `Moyen : orange`, `Transaction : demo-txn-demo-4` |
+| Scénario « Annuler » | `Statut : failure` avec les mêmes détails de transaction |
+| Scénario fermeture (X) | `Paiement annulé.` (`PaymentCancelled`) |
+| Scénario backend arrêté | `Erreur : Erreur réseau : Connection refused` (`PaymentError` réseau dès la création) |
+| WebView | retour au `return_url` par navigation JavaScript détecté dans les deux issues ; page locale sans sous-ressource, donc aucun cas d'erreur de sous-ressource observé ; aucune exception dans logcat |
 
 Le port de la démo est `8090` : `8080` était déjà utilisé par un autre service
 local sur le poste. Le faux backend écoute sur `0.0.0.0:8090` et l'app cible
 `10.0.2.2:8090`.
 
-La phase n'est pas validée tant que les scénarios Android du point 6 n'ont pas
-été exécutés sur l'émulateur.
+Note d'environnement : sur le réseau du poste, le wrapper Gradle n'arrivait pas
+à télécharger `gradle-9.5.0-all.zip` (`Connection reset` puis
+`UnknownHostException: services.gradle.org` côté Java, alors que curl suivait
+les redirections). La distribution a été téléchargée via curl puis placée dans
+`~/.gradle/wrapper/dists/`, après quoi le build a abouti. Aucun changement de
+dépôt n'a été nécessaire.
+
+La phase est validée : les huit points du DoD sont satisfaits.
